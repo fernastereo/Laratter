@@ -18,7 +18,7 @@
                 <p class="card-text">{{ $message['content'] }} <a href="/messages/{{ $message['id'] }}">Leer mas</a> </p>
             </div>
         @empty 
-            <p>No hay mensajes destacados!</p>
+            <p>No hay ningun mensaje destacados!</p>
         @endforelse
     </div>
 @endsection
