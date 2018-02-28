@@ -15,3 +15,4 @@ Route::get('/', 'PagesController@home');
 Route::get('/messages/{message}', 'MessagesController@show');
 //Esta ruta es para el caso localhost/messages/1 :Donde 1 es un id cualquiera que se quiera consultar
 //Cuendo entre a esa ruta, llamará el método show del Controlador MessagesController
+Route::post('/messages/create', 'MessagesController@create');
