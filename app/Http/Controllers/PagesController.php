@@ -11,6 +11,8 @@ class PagesController extends Controller
 		$messages = Message::all();
 
 		//dd($messages);
+		//Esta funcion es la equivalente al vardump de php
+		
 	    return view('welcome', [
 	    	'messages' => $messages,
 	    ]);
