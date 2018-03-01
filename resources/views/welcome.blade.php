@@ -33,5 +33,10 @@
         @empty 
             <p>No hay ningun mensaje destacados!</p>
         @endforelse
+        @if(count($messages))
+            <div class="mt-2 mx-auto">
+                {{ $messages->links() /*Esto solo funciona cuando se usa paginate*/ }}
+            </div>
+        @endif
     </div>
 @endsection
