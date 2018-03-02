@@ -19,3 +19,4 @@ Route::get('/messages/{message}', 'MessagesController@show');
 Route::post('/messages/create', 'MessagesController@create')->middleware('auth');
 
 Auth::routes(); //Todos los formularios de para administrar Usuarios estan aqui (Registro, login, etc)
+Route::get('/{username}', 'UsersController@show');

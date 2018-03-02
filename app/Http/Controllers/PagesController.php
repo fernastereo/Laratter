@@ -10,7 +10,7 @@ class PagesController extends Controller
     public function home(){
 		//$messages = Message::all(); Trae todo los registros
 
-		$messages = Message::paginate(10);
+		$messages = Message::latest()->paginate(10);
 
 		//dd($messages);
 		//Esta funcion es la equivalente al vardump de php
