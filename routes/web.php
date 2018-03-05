@@ -21,5 +21,7 @@ Route::post('/messages/create', 'MessagesController@create')->middleware('auth')
 Auth::routes(); //Todos los formularios de para administrar Usuarios estan aqui (Registro, login, etc)
 
 Route::get('/{username}/follows', 'UsersController@follows');
+Route::get('/{username}/followed', 'UsersController@followed');
 Route::post('/{username}/follow', 'UsersController@follow')->middleware('auth');
+Route::post('/{username}/unfollow', 'UsersController@unfollow')->middleware('auth');
 Route::get('/{username}', 'UsersController@show');

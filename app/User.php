@@ -38,4 +38,10 @@ class User extends Authenticatable
     public function followers(){
         return $this->belongsToMany(User::class, 'followers', 'followed_id', 'user_id');
     }
+
+    public function isFollowing(User $user){
+        //Se le está pidiendo a la Relación (follows) que diga si contiene el usuario que se envía como parámetro
+        //es decir que diga si estoy siguiendo o no al usuario que mando como parámetro
+        return $this->follows->contains($user);
+    }
 }
