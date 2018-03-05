@@ -44,4 +44,8 @@ class User extends Authenticatable
         //es decir que diga si estoy siguiendo o no al usuario que mando como parámetro
         return $this->follows->contains($user);
     }
+
+    public function socialProfiles(){
+        return $this->hasMany(SocialProfile::class);
+    }
 }
