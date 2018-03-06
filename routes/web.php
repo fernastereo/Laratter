@@ -23,11 +23,12 @@ Route::get('/auth/facebook/callback', 'SocialAuthController@callback');
 Route::post('/auth/facebook/register', 'SocialAuthController@register');
 
 Route::group(['middleware' => 'auth'], function(){
-	Route::post('/messages/create', 'MessagesController@create')//->middleware('auth');
-	Route::post('/{username}/follow', 'UsersController@follow')//->middleware('auth');
-	Route::post('/{username}/unfollow', 'UsersController@unfollow')//->middleware('auth');
+	Route::post('/messages/create', 'MessagesController@create');//->middleware('auth');
+	Route::post('/{username}/follow', 'UsersController@follow');//->middleware('auth');
+	Route::post('/{username}/unfollow', 'UsersController@unfollow');//->middleware('auth');
 	Route::post('/{username}/dms', 'UsersController@sendPrivateMessage');
-})
+	Route::get('/conversations/{conversation}', 'UsersController@showConversation');
+});
 Route::get('/{username}/follows', 'UsersController@follows');
 Route::get('/{username}/followed', 'UsersController@followed');
 Route::get('/{username}', 'UsersController@show');
