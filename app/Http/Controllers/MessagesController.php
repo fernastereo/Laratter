@@ -33,4 +33,14 @@ class MessagesController extends Controller
     	return redirect('messages/' . $message->id);
     	
     }
+
+    public function search(Request $request){
+        $query = $request->input('query');
+
+        $messages = Message::where('content', 'LIKE', "%$query%")->paginate(10);
+
+        return view('messages.index', [
+            'messages' => $messages,
+        ]);
+    }
 }
