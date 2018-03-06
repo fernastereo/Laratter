@@ -59,10 +59,15 @@ class UsersController extends Controller
         $me = $request->user();
         $message = $request->input('message');
 
+        $conversation = Conversation::between($me, $user);
+
+        /*
+        Ya no necesitamos crearla porque el metodo between se encarga de crearla si no existe:
         $conversation = Conversation::create(); //Se crea la conversacion
         $conversation->users()->attach($me);    //Me agrego a mi mismo a la conversacion
         $conversation->users()->attach($user);  //Se agrega el usuario al que se le está enviando el mensaje
-
+        */
+        
         $privateMessage = PrivateMessage::create([
             'conversation_id' => $conversation->id,
             'user_id' => $me->id,
