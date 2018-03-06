@@ -11,6 +11,13 @@
 		<span class="badge badge-secondary">{{ $user->followers->count() }}</span>
 	</a>
 	@if(Auth::check())<!--Si hay un usuario logueado-->
+		@if(Gate::allows('dms', $user))
+			<form action="/{{ $user->username }}/dms" method="post">
+				{{ csrf_field() }}
+				<input type="text" name="message" class="form-control"></input>
+				<button type="submit" class="btn btn-success">Enviar DM</button>
+			</form>
+		@endif
 		@if(Auth::user()->isFollowing($user))
 			<!--Si el usuario logueado está siguiendo al usuario del que se están listando los mensajes-->
 			<form action="/{{ $user->username }}/unfollow" method="post">

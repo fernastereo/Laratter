@@ -16,15 +16,18 @@ Route::get('/messages/{message}', 'MessagesController@show');
 //Esta ruta es para el caso localhost/messages/1 :Donde 1 es un id cualquiera que se quiera consultar
 //Cuendo entre a esa ruta, llamará el método show del Controlador MessagesController
 
-Route::post('/messages/create', 'MessagesController@create')->middleware('auth');
 
 Auth::routes(); //Todos los formularios de para administrar Usuarios estan aqui (Registro, login, etc)
 Route::get('/auth/facebook', 'SocialAuthController@facebook');
 Route::get('/auth/facebook/callback', 'SocialAuthController@callback');
 Route::post('/auth/facebook/register', 'SocialAuthController@register');
 
+Route::group(['middleware' => 'auth'], function(){
+	Route::post('/messages/create', 'MessagesController@create')//->middleware('auth');
+	Route::post('/{username}/follow', 'UsersController@follow')//->middleware('auth');
+	Route::post('/{username}/unfollow', 'UsersController@unfollow')//->middleware('auth');
+	Route::post('/{username}/dms', 'UsersController@sendPrivateMessage');
+})
 Route::get('/{username}/follows', 'UsersController@follows');
 Route::get('/{username}/followed', 'UsersController@followed');
-Route::post('/{username}/follow', 'UsersController@follow')->middleware('auth');
-Route::post('/{username}/unfollow', 'UsersController@unfollow')->middleware('auth');
 Route::get('/{username}', 'UsersController@show');
