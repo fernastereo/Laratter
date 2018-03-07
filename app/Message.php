@@ -25,6 +25,10 @@ class Message extends Model
 		return \Storage::disk('public')->url($image);
 	}
 
+	public function responses(){
+		return $this->hasMany(Response::class)->orderBy('created_at', 'desc');
+	}
+	
 	public function toSearchableArray(){
 		$this->load('user');
 

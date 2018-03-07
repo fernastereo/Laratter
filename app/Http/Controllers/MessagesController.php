@@ -37,7 +37,7 @@ class MessagesController extends Controller
     public function search(Request $request){
         $query = $request->input('query');
 
-        //Busqueda normal $messages = Message::with('user')->where('content', 'LIKE', "%$query%")->paginate(10);
+        //Busqueda normal: $messages = Message::with('user')->where('content', 'LIKE', "%$query%")->paginate(10);
 
         //Busqueda con algolia:
         $messages = Message::search($query)->get();
@@ -46,5 +46,9 @@ class MessagesController extends Controller
         return view('messages.index', [
             'messages' => $messages,
         ]);
+    }
+
+    public function responses(Message $message){
+        return $message->responses->load('user');
     }
 }

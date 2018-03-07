@@ -45,6 +45,10 @@ class User extends Authenticatable
         return $this->follows->contains($user);
     }
 
+    public function responses(){
+        return $this->hasMany(Response::class)->orderBy('created_at', 'desc');
+    }
+
     public function socialProfiles(){
         return $this->hasMany(SocialProfile::class);
     }
