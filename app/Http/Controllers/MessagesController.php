@@ -37,7 +37,11 @@ class MessagesController extends Controller
     public function search(Request $request){
         $query = $request->input('query');
 
-        $messages = Message::with('user')->where('content', 'LIKE', "%$query%")->paginate(10);
+        //Busqueda normal $messages = Message::with('user')->where('content', 'LIKE', "%$query%")->paginate(10);
+
+        //Busqueda con algolia:
+        $messages = Message::search($query)->get();
+        $messages->load('user');
 
         return view('messages.index', [
             'messages' => $messages,
