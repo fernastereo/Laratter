@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Notifications\UserFollowed;
 use App\Conversation;
 use App\PrivateMessage;
 use Illuminate\Http\Request;
@@ -23,6 +24,9 @@ class UsersController extends Controller
 		$me = $request->user();//Me busco a mi mismo como usuario logueado
 
 		$me->follows()->attach($user);
+
+        //al usuario ($user) notificale que el usuario $me lo sigue
+        $user->notify(new UserFollowed($me));
 
 		return redirect("/$username")->withSuccess('Usuario seguido!');
     }
@@ -90,6 +94,10 @@ class UsersController extends Controller
 
     private function findByUsername($username){
         return User::where('username', $username)->first();
+    }
+
+    public function notifications(Request $request){
+        return $request->user()->notifications;
     }
 
 }

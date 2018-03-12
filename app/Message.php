@@ -26,7 +26,7 @@ class Message extends Model
 	}
 
 	public function responses(){
-		return $this->hasMany(Response::class)->orderBy('created_at', 'desc');
+		return $this->hasMany(Response::class)->with('user')->latest();
 	}
 	
 	public function toSearchableArray(){
